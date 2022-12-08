@@ -3,12 +3,12 @@ import matplotlib.pyplot as mp
 
 
 if __name__ == '__main__':
-    data = pandas.read_csv('./raw_data/aryelle_data.csv')
+    data = pandas.read_csv('./raw_data/20221105_N100H100_DSF_new.csv')
     u = data.groupby("SamplePos")["Temp", '465-580'].agg(list)
     aggregated_data = {'Temperature Celsius': u.iloc[0, 0]}
 
     for index, row in u.iterrows():
-        if len(row['465-580']) == 2815:
+        if len(row['465-580']) == len(row['Temp']):
             aggregated_data[row.name] = row['465-580']
 
     aggregated_data = pandas.DataFrame(aggregated_data)
@@ -30,12 +30,12 @@ if __name__ == '__main__':
 
     derivative_data = pandas.DataFrame(derivative_data)
 
-    plot_2 = derivative_data.plot(x='Temperature Celsius',
-                                  y=list(derivative_data.columns[1::]),
-                                  kind='line',
-                                  legend=False,
-                                  linewidth=0.1)
-    plot_2.set_ylabel('dRU/dt')
+    # plot_2 = derivative_data.plot(x='Temperature Celsius',
+    #                               y=list(derivative_data.columns[1::]),
+    #                               kind='line',
+    #                               legend=False,
+    #                               linewidth=0.1)
+    # plot_2.set_ylabel('dRU/dt')
 
     plot_1 = aggregated_data.plot(x='Temperature Celsius',
                                   y=list(aggregated_data.columns)[1::],
