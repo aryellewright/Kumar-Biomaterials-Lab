@@ -12,7 +12,14 @@ def remove_spaces(filename: str, new_file_postfix: str = '_new'):
         new_filename = filename.split('.')
         new_filename = f'{new_filename[0]}{new_file_postfix}.csv'
         with open(new_filename, 'w+') as new_file:
-            for i in f.readlines():
-                new_line = i.split()
+            for i, row in enumerate(f.readlines()):
+                new_line = row.split()
+                if i != 0:
+                    new_line = new_line[:2] + new_line[3:]
+
                 new_line = ','.join(new_line)
                 new_file.write(new_line + '\n')
+
+
+remove_spaces('20221104_N100H100N75H25N50H50N25H75.csv')
+remove_spaces('20221105_N100H100_DSF.csv')

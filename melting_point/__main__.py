@@ -36,11 +36,12 @@ if __name__ == '__main__':
     #                               legend=False,
     #                               linewidth=0.1)
     # plot_2.set_ylabel('dRU/dt')
-
+    print(aggregated_data.columns)
     plot_1 = aggregated_data.plot(x='Temperature Celsius',
-                                  y=list(aggregated_data.columns)[1::],
+                                  y=['A1', 'A2', 'A3', 'A21'],
                                   kind='line',
-                                  legend=False,
+                                  legend=True,
+                                  label=['N100-10%','N100-50%','N100-100%','BSA Control'],
                                   linewidth=1)
     plot_1.set_ylabel('RFU')
 
