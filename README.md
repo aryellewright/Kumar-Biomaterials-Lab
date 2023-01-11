@@ -9,5 +9,9 @@
 ## Instructions:
 ### Comments have been left throughought each line of code to help provide detail on what's happening. Note: the titration code uses Google Colab, while the DSF code does not. 
 
+### To get started run
+`pip install .`
+
+
 ## Credits:
 ### I would like to thank Dr. Beeler (@sbeeler) for her involvement with creating my titration code. I would also like to thank Camden Fritz (@camdenfritz) for his involvement 
