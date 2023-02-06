@@ -1,3 +1,10 @@
 venv/
 .DS_Store
 .idea/
+*.egg-info
+__pycache__/
+build/
+# Don't add personal csv files.
+*.csv
+*.png
+.ipynb_checkpoints/

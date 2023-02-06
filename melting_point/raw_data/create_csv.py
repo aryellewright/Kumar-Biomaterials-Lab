@@ -5,8 +5,7 @@ This function will reformat a csv that has space delimiter instead of comma.
 :params:[Optional] new_file_postfix: Postfix of new file to not have duplicate.
                                      default='_new'
 """
-
-
+import os
 def remove_spaces(filename: str, new_file_postfix: str = '_new'):
     with open(filename, 'r') as f:
         new_filename = filename.split('.')
@@ -20,6 +19,6 @@ def remove_spaces(filename: str, new_file_postfix: str = '_new'):
                 new_line = ','.join(new_line)
                 new_file.write(new_line + '\n')
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-remove_spaces('20221104_N100H100N75H25N50H50N25H75.csv')
-remove_spaces('20221105_N100H100_DSF.csv')
+remove_spaces('20221217_Cas9_AW_RK_.csv')
