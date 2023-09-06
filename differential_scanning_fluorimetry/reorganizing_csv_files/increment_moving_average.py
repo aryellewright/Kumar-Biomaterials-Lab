@@ -9,6 +9,7 @@ def temp_bucket(temp):
 # Averages the data points into half increment buckets
 def process_csv(file_path, wells):
     df = pd.read_csv(file_path)
+    df = df[df['SamplePos'].isin(wells)]  # Filter the data to include only specified wells
     df['Temp Bucket'] = df['Temp'].apply(lambda x: temp_bucket(x))
 
     result = df.groupby(['SamplePos', 'Temp Bucket'])[
@@ -23,22 +24,8 @@ def process_csv(file_path, wells):
 
     return final_result
 
-# converting the data into a dictionary so the moving_average function can access it 
-def read_csv_file(file_path, wells):
-    data = {}
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-        headers = next(reader)
-        for row in reader:
-            sample_pos = row[0]
-            temp_bucket = int(row[1])
-            flor_value = int(row[2])
-            if sample_pos not in data:
-                data[sample_pos] = {}
-            data[sample_pos][temp_bucket] = flor_value
-    return data
 
-def read_csv_file(file_path, wells):
+def read_csv_file(file_path):
     data = {}
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
@@ -112,11 +99,11 @@ def write_result_to_csv(result, file_path):
             writer.writerow(flor_values)
 
 
-wells = ['B2','C2','D2','E2','F2','G2','B3','C3','D3','E3','F3','G3','D4','E4','F4','G4']
-filename_1 = read_csv_file("/Users/aryellewright/Documents/kumar-biomaterials-lab/Kumar-Biomaterials-Lab/differential_scanning_fluorimetry/raw_data/20221217_Cas9_trial_AW_RK.csv")
-i = process_csv(filename_1, wells)
+filename_1 = read_csv_file("/Users/aryellewright/Documents/Kumar-Biomaterials-Lab/differential_scanning_fluorimetry/raw_data/20221217_Cas9_trial_AW_RK.csv")
+wells_to_process = ['B2','C2','D2','E2','F2','G2','B3','C3','D3','E3','F3','G3','D4','E4','F4','G4']
+results = process_csv(filename_1, wells_to_process)
 
-write_result_to_csv(i, './half_increments_DSF_data.csv')
+write_result_to_csv(results, './half_increments_DSF_data.csv')
 
 data = read_csv_file("/Users/aryellewright/Documents/kumar-biomaterials-lab/Kumar-Biomaterials-Lab/differential_scanning_fluorimetry/raw_data/20221217_Cas9_trial_AW_RK.csv")
 result = moving_average(data, 3)

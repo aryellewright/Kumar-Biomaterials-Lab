@@ -83,10 +83,10 @@ def create_dsf_graphs(filename):
 
     # plotting our melting curve
     melting_curve_plot = melting_curve_df_scaled.plot(x='Temperature Celsius',
-                                  y=['B2','D2','E2'],
+                                  y=['B2','C2','D2','E2','F2','G2','B3','C3','D3','E3','F3','G3','D4','E4','F4','G4'],
                                   kind='line',
                                   legend=True,
-                                  label=['20µL Cas9','18µL Cas9','16µL Cas9'],
+                                  label=['B2','C2','D2','E2','F2','G2','B3','C3','D3','E3','F3','G3','D4','E4','F4','G4'],
                                   linewidth=1)
     melting_curve_plot.set_ylabel('Normalized RFU')
     melting_curve_plot.set_xlabel('Temperature (°C)')
