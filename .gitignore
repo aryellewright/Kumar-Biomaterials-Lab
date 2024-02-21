@@ -8,3 +8,4 @@ build/
 *.csv
 *.png
 .ipynb_checkpoints/
+~$*
